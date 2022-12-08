@@ -2,6 +2,7 @@
   "name": "vite-plugin-vite3-dir-list",
   "version": "1.0.3",
   "description": "vite3 list files",
+  "main": "out.js",
   "scripts": {},
   "repository": {
     "type": "git",

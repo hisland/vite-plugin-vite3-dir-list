@@ -1,0 +1,25 @@
+{
+  "name": "vite-plugin-vite3-dir-list",
+  "version": "1.0.3",
+  "description": "vite3 list files",
+  "main": "main.ts",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hisland/vite-plugin-vite3-dir-list.git"
+  },
+  "keywords": [
+    "vite3",
+    "list files"
+  ],
+  "author": "hisland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hisland/vite-plugin-vite3-dir-list/issues"
+  },
+  "homepage": "https://github.com/hisland/vite-plugin-vite3-dir-list#readme",
+  "devDependencies": {
+    "@types/node": "^18.6.4",
+    "vite": "^3.0.4"
+  }
+}

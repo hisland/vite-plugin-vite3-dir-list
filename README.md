@@ -1,3 +1,3 @@
 list files in vite dir
 
-`esbuild --format=cjs --outfile=out.js main.ts` gen `out.js`
+`esbuild --format=esm --outfile=out.mjs main.ts` gen `out.mjs`

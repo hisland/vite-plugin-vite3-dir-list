@@ -19,28 +19,44 @@ export default function dirListPlugin() {
     configureServer(server: ViteDevServer) {
       server.middlewares.use((req, res, next) => {
         const { url } = req
-        if (typeof url === 'string' && url.endsWith('/')) {
-          const pwd = path.join(process.cwd(), url)
-          const list1 = fs.readdirSync(pwd, {
-            withFileTypes: true,
-          })
+        const thatPath = path.join(process.cwd(), url)
+        // console.log('thatPath: ', thatPath)
+        try {
+          const stat = fs.statSync(thatPath)
+          // console.log('stat.isDirectory: ', stat.isDirectory())
+          if (stat.isDirectory()) {
+            if (!thatPath.endsWith('/')) {
+              res.writeHead(301, { Location: `${url}/` })
+              res.end()
+            } else {
+              const list1 = fs.readdirSync(thatPath, {
+                withFileTypes: true,
+              })
+              // console.log('list1: ', list1)
 
-          const hasIndex = list1.some((vv) => vv.name === 'index.html')
-          if (hasIndex) {
-            res.writeHead(301, { Location: 'index.html' })
-            res.end()
-            // res.end(fs.readFileSync(path.join(pwd, 'index.html'), 'utf8'))
-          } else {
-            const list2 = list1.map((file) => {
-              if (file.isDirectory()) {
-                return file.name + '/'
+              // const hasIndex = list1.some((vv) => vv.name === 'index.html')
+              const hasIndex = false
+              // console.log('hasIndex: ', hasIndex)
+              if (hasIndex) {
+                res.writeHead(301, { Location: 'index.html' })
+                res.end()
+                // res.end(fs.readFileSync(path.join(pwd, 'index.html'), 'utf8'))
               } else {
-                return file.name
+                const list2 = list1.map((file) => {
+                  if (file.isDirectory()) {
+                    return file.name + '/'
+                  } else {
+                    return file.name
+                  }
+                })
+                res.end(genDirListHtml(list2))
               }
-            })
-            res.end(genDirListHtml(list2))
+            }
+          } else {
+            next()
           }
-        } else {
+        } catch (error) {
+          // console.log('error: ', error)
           next()
         }
       })

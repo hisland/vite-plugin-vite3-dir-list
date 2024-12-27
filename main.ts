@@ -40,6 +40,11 @@ export default function dirListPlugin() {
                 withFileTypes: true,
               })
               // console.log('list1: ', list1)
+              list1.sort((aa, bb) => {
+                const aaNum = parseInt(aa.name)
+                const bbNum = parseInt(bb.name)
+                return aaNum - bbNum
+              })
 
               // const hasIndex = list1.some((vv) => vv.name === 'index.html')
               const hasIndex = false

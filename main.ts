@@ -1,5 +1,8 @@
+// @ts-ignore
 import path from 'path'
+// @ts-ignore
 import fs from 'fs'
+// @ts-ignore
 import { type ViteDevServer } from 'vite/dist/node'
 
 function genDirListHtml(list: string[]) {
@@ -26,6 +29,7 @@ export default function dirListPlugin() {
     configureServer(server: ViteDevServer) {
       server.middlewares.use((req, res, next) => {
         const { url } = req
+        // @ts-ignore
         const thatPath = path.join(process.cwd(), url)
         // console.log('thatPath: ', thatPath)
         try {

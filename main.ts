@@ -36,7 +36,7 @@ export default function dirListPlugin() {
           const stat = fs.statSync(thatPath)
           // console.log('stat.isDirectory: ', stat.isDirectory())
           if (stat.isDirectory()) {
-            if (!thatPath.endsWith('/')) {
+            if (!thatPath.endsWith(path.sep)) {
               res.writeHead(301, { Location: `${url}/` })
               res.end()
             } else {
@@ -50,8 +50,8 @@ export default function dirListPlugin() {
                 return aaNum - bbNum
               })
 
-              // const hasIndex = list1.some((vv) => vv.name === 'index.html')
-              const hasIndex = false
+              const hasIndex = list1.some((vv) => vv.name === 'index.html')
+              // const hasIndex = false
               // console.log('hasIndex: ', hasIndex)
               if (hasIndex) {
                 res.writeHead(301, { Location: 'index.html' })

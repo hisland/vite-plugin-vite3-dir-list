@@ -27,7 +27,7 @@ function dirListPlugin() {
         try {
           const stat = fs.statSync(thatPath);
           if (stat.isDirectory()) {
-            if (!thatPath.endsWith("/")) {
+            if (!thatPath.endsWith(path.sep)) {
               res.writeHead(301, { Location: `${url}/` });
               res.end();
             } else {
@@ -39,7 +39,7 @@ function dirListPlugin() {
                 const bbNum = parseInt(bb.name);
                 return aaNum - bbNum;
               });
-              const hasIndex = false;
+              const hasIndex = list1.some((vv) => vv.name === "index.html");
               if (hasIndex) {
                 res.writeHead(301, { Location: "index.html" });
                 res.end();

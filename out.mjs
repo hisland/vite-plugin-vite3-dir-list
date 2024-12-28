@@ -2,10 +2,17 @@ import path from "path";
 import fs from "fs";
 function genDirListHtml(list) {
   return `
-  <style>
-  a{line-height: 1.8em;}
-  a:hover{color:darkcyan}
-  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      a {
+        line-height: 1.8em;
+      }
+      a:hover {
+        color: darkcyan;
+      }
+    </style>
+  </head>
   <ul>
   ${list.map((vv) => `<li><a href="${vv}">${vv}</a></li>`).join("")}
   </ul>`;
@@ -26,6 +33,11 @@ function dirListPlugin() {
             } else {
               const list1 = fs.readdirSync(thatPath, {
                 withFileTypes: true
+              });
+              list1.sort((aa, bb) => {
+                const aaNum = parseInt(aa.name);
+                const bbNum = parseInt(bb.name);
+                return aaNum - bbNum;
               });
               const hasIndex = false;
               if (hasIndex) {

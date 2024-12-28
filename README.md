@@ -1,3 +1,4 @@
 list files in vite dir
 
-`esbuild --format=esm --outfile=out.mjs main.ts` gen `out.mjs`
+ 执行下面命令生成 `out.mjs`
+`esbuild --format=esm --outfile=out.mjs main.ts`
